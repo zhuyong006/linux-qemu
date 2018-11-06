@@ -1,0 +1,8 @@
+---- sfs_inode_cachep Matches (7 in 0 files) ----
+Simple.c (drivers\demo\simplefs):static struct kmem_cache *sfs_inode_cachep;
+Simple.c (drivers\demo\simplefs):			inode_buffer = kmem_cache_alloc(sfs_inode_cachep, GFP_KERNEL);
+Simple.c (drivers\demo\simplefs):	sfs_inode = kmem_cache_alloc(sfs_inode_cachep, GFP_KERNEL);
+Simple.c (drivers\demo\simplefs):	kmem_cache_free(sfs_inode_cachep, sfs_inode);
+Simple.c (drivers\demo\simplefs):	sfs_inode_cachep = kmem_cache_create("sfs_inode_cache",
+Simple.c (drivers\demo\simplefs):	if (!sfs_inode_cachep) {
+Simple.c (drivers\demo\simplefs):	kmem_cache_destroy(sfs_inode_cachep);
