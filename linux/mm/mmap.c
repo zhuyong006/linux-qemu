@@ -1446,6 +1446,9 @@ SYSCALL_DEFINE6(mmap_pgoff, unsigned long, addr, unsigned long, len,
 		if (IS_ERR(file))
 			return PTR_ERR(file);
 	}
+	
+	if(mm_pid == current->pid)
+		printk("Debug : mmap,len : %lu\n",len);
 
 	flags &= ~(MAP_EXECUTABLE | MAP_DENYWRITE);
 

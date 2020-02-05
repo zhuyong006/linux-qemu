@@ -2310,6 +2310,8 @@ void __init setup_nr_node_ids(void);
 #else
 static inline void setup_nr_node_ids(void) {}
 #endif
-
+extern void get_vma_size_info(struct vm_area_struct *vma, struct mm_struct *mm,
+			unsigned long *rss, unsigned long *swap);
+extern int mm_pid;
 #endif /* __KERNEL__ */
 #endif /* _LINUX_MM_H */

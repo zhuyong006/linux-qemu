@@ -656,7 +656,21 @@ static int smaps_hugetlb_range(pte_t *pte, unsigned long hmask,
 	return 0;
 }
 #endif /* HUGETLB_PAGE */
-
+void get_vma_size_info(struct vm_area_struct *vma, struct mm_struct *mm,
+			unsigned long *rss, unsigned long *swap)
+{
+	struct mem_size_stats mss;
+	struct mm_walk smaps_walk = {
+		.pmd_entry = smaps_pte_range,
+		.mm = mm,
+		.private = &mss,
+	};
+	memset(&mss,0,sizeof mss);
+	walk_page_vma(vma,&smaps_walk);
+	*rss = mss.resident;
+	*swap = mss.swap;
+}
+EXPORT_SYMBOL(get_vma_size_info);
 static int show_smap(struct seq_file *m, void *v, int is_pid)
 {
 	struct vm_area_struct *vma = v;

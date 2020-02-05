@@ -3347,6 +3347,16 @@ static int __handle_mm_fault(struct mm_struct *mm, struct vm_area_struct *vma,
 	if (unlikely(is_vm_hugetlb_page(vma)))
 		return hugetlb_fault(mm, vma, address, flags);
 
+	unsigned long start = vma->vm_start;
+	unsigned long end = vma->vm_end;
+	if(end - start > 0)
+	{
+		unsigned long rss;
+		unsigned long swap;
+		get_vma_size_info(vma,mm,&rss,&swap);
+		if(mm_pid == current->pid)
+			printk("Debug : rss:%lu,swap:%lu,start:%#1x - %#1x\n",rss,swap,start,end);
+	}
 	pgd = pgd_offset(mm, address);
 	pud = pud_alloc(mm, pgd, address);
 	if (!pud)

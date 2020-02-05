@@ -134,6 +134,14 @@ static inline int __must_check
 request_irq(unsigned int irq, irq_handler_t handler, unsigned long flags,
 	    const char *name, void *dev)
 {
+	/*
+	 * irq:   中断号
+	 * handle:中断处理的函数指针
+	 * thread_fn：这是第三个参数，仅仅针对中断线程化有效
+	 * flags:中断的标记
+	 * name：中断的名称
+	 * dev：针对中断的私有指针，特别对于共享中断，可用于区分设备
+	 */
 	return request_threaded_irq(irq, handler, NULL, flags, name, dev);
 }
 
